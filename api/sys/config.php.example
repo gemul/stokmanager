@@ -1,4 +1,7 @@
 <?php
+define('SITE_NAME', 'Site Name');
+define('SHOP_NAME', 'Shop Name');
+
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'stokmanager');
 define('DB_USER', 'root');
