@@ -1,0 +1,5 @@
+image width: 350px
+font A total width:32 char
+font B total width:42 char
+barcode: UPCA JAN13
+standard barcode height : 80

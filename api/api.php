@@ -1,7 +1,9 @@
 <?php
+session_start();
 header('Content-Type: application/json');
 require_once("sys/config.php");
 require_once("sys/db.php");
+require_once("sys/models.php");
 require_once("sys/functions.php");
 if(isset($_GET['mod'])){
     if($_GET['mod']==""){

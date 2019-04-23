@@ -1,0 +1,3 @@
+<?php
+FprintLabel(1);
+?>

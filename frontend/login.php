@@ -1,90 +1,107 @@
-<?php
-if(!$callMark){exit;}
-?><!DOCTYPE html>
-<html>
-  <head>
-    <title>Bootstrap Admin Theme v3</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="frontend/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- styles -->
-    <link href="frontend/css/styles.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body class="login-bg">
-  	<div class="header">
-	     <div class="container">
-	        <div class="row">
-	           <div class="col-md-12">
-	              <!-- Logo -->
-	              <div class="logo">
-	                 <h1><a href="index.html">Bootstrap Admin Theme</a></h1>
-	              </div>
-	           </div>
-	        </div>
-	     </div>
-	</div>
+<head>
 
-	<div class="page-content container">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-				<div class="login-wrapper">
-			        <div class="box">
-			            <div class="content-wrap">
-							<form onsubmit="return login(this)">
-								<h6>Sign In</h6>
-								<input class="form-control" type="text" placeholder="Username">
-								<input class="form-control" type="password" placeholder="Password">
-								<div class="action">
-									<button type=submit class="btn btn-primary signup">Login</button>
-								</div>                
-							</form>
-			            </div>
-			        </div>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-			        <div class="already">
-			            <p>Don't have an account yet?</p>
-			            <a href="signup.html">Sign Up</a>
-			        </div>
-			    </div>
-			</div>
-		</div>
-	</div>
+  <title>StokManager</title>
 
+  <!-- Custom fonts for this template-->
+  <link href="frontend/sbadmin2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
+  <!-- Custom styles for this template-->
+  <link href="frontend/sbadmin2/css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="frontend/bootstrap/js/bootstrap.min.js"></script>
-	<script src="frontend/js/custom.js"></script>
-	<script>
-		function login(form){
-			var form=$(form);
-			$.ajax({
-				url : "api/api.php?mod=login",
-				dataType : 'json',
-				type : "POST",
-				data : form.serialize(),
-				beforeSend : function(){
-					form.find('.signup').html("Logging in").prop('disabled',true);
-				},
-				success : function(){
-					
-					form.find('.signup').html("Login").prop('disabled',true);
-				},
-				error : function(){
+</head>
 
-				}
-			});
-			return false;
-		}
-	</script>
-  </body>
+<body class="bg-gradient-primary">
+
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                  </div>
+                  <form class="user" onsubmit="return login(this)">
+                    <div class="form-group">
+                      <input type="username" class="form-control form-control-user" name="username" id="username" aria-describedby="emailHelp" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                      Login
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function login(form) {
+      var form = $(form);
+      $.ajax({
+        url: "api/api.php?mod=auth.login",
+        dataType: 'json',
+        type: "POST",
+        data: form.serialize(),
+        beforeSend: function() {
+          form.find('.signup').html("Logging in").prop('disabled', true);
+        },
+        success: function(result) {
+          if (result.status == 1) {
+            location.replace('./');
+            notifikasi("Login sukses", 'success');
+          } else {
+            form.find('.signup').html("Login").prop('disabled', false);
+            notifikasi("Terjadi kesalahan:"+result.message, 'danger');
+          }
+        },
+        error: function() {
+          notifikasi("Terjadi kesalahan:", 'danger');
+          form.find('.signup').html("Login").prop('disabled', false);
+        }
+      });
+      return false;
+    }
+  </script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="frontend/sbadmin2/vendor/jquery/jquery.min.js"></script>
+  <script src="frontend/sbadmin2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="frontend/sbadmin2/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="frontend/sbadmin2/js/sb-admin-2.min.js"></script>
+  <script src="frontend/js/bootstrap-notify.min.js"></script>
+  <script src="frontend/js/custom.js"></script>
+
+</body>
+
 </html>

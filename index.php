@@ -1,4 +1,5 @@
 <?php
+session_start();
 $callMark=true;
 if(isset($_SESSION['login']) && $_SESSION['login']=="admin"){
     //sudah login

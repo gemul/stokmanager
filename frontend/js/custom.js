@@ -1,20 +1,24 @@
-$(document).ready(function(){
-
-
-  $(".submenu > a").click(function(e) {
-    e.preventDefault();
-    var $li = $(this).parent("li");
-    var $ul = $(this).next("ul");
-
-    if($li.hasClass("open")) {
-      $ul.slideUp(350);
-      $li.removeClass("open");
+var audioNotification = new Audio('frontend/audio/definite.ogg');
+var audioError = new Audio('frontend/audio/system-fault.ogg');
+function notifikasi(text, notiftype) {
+    if (notiftype === undefined) notiftype = 'info';
+    $.notify(
+        {
+            // options
+            message: text,
+        },
+        {
+            // settings
+            allow_dismiss: true,
+            newest_on_top: false,
+            type: notiftype,
+            timer: 3000,
+            z_index: 2031
+        }
+    );
+    if (notiftype == "danger") {
+        audioError.play();
     } else {
-      $(".nav > li > ul").slideUp(350);
-      $(".nav > li").removeClass("open");
-      $ul.slideDown(350);
-      $li.addClass("open");
+        audioNotification.play();
     }
-  });
-  
-});
+}
