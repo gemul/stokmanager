@@ -1,7 +1,7 @@
 <?php
 session_start();
 $callMark=true;
-if(isset($_SESSION['login']) && $_SESSION['login']=="admin"){
+if(isset( $_SESSION['stokman']) && $_SESSION['stokman']['login']=="admin"){
     //sudah login
     include("frontend/home.php");
 }else{

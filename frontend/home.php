@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Stock Manager</title>
+  <title>{{app name}}</title>
 
   <!-- Custom fonts for this template-->
   <link href="frontend/sbadmin2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,7 +33,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">{{name}}</div>
+        <div class="sidebar-brand-text mx-3" id="shop_name">{{name}}</div>
       </a>
 
       <!-- Divider -->
@@ -212,7 +212,7 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="user_name">{{User}}</span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
@@ -389,6 +389,7 @@
   <script src="frontend/sbadmin2/js/sb-admin-2.min.js"></script>
   <script src="frontend/js/bootstrap-notify.min.js"></script>
   <script src="frontend/js/custom.js"></script>
+  <script src="frontend/js/homepage.js"></script>
 
   <!-- Page level plugins -->
 
