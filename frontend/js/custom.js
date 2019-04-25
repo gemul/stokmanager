@@ -22,3 +22,37 @@ function notifikasi(text, notiftype) {
         audioNotification.play();
     }
 }
+
+function loadPage(path){
+    if(path===undefined){
+        console.log("ERROR: loadPage require path");
+    }else if(path==""){
+        console.log("ERROR: loadPage path cannot be empty");
+    }else{
+        $.ajax({
+            url:path,
+            type:'GET',
+            beforeSend:function(){
+                loadingVeil(true);
+            },
+            success:function(result){
+                $('#page-content').html(result);
+            },
+            error:function(err){
+                notifikasi("AJAX:Gagal memuat halaman","danger");
+            },
+            complete:function(){
+                loadingVeil(false);
+            }
+        });
+    }
+}
+
+function loadingVeil(open){
+    if(open===undefined)open=true;
+    if(open){
+        $('#loading-veil').fadeIn();
+    }else{
+        $('#loading-veil').fadeOut();
+    }
+}
