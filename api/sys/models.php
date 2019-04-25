@@ -1,5 +1,5 @@
 <?php
-class models {
+class models extends DB{
     protected $tabel = "";
     function get($filters,$start=0,$limit=512){
         $filterCount=count($filters);
@@ -15,5 +15,20 @@ class models {
             $filter
             "
             )->fetchAll();
+    }
+    function insert($data){
+        $query="INSERT INTO ".$this->tabel." ";
+        $cols="(";
+        $values="(";
+        foreach($data as $key=>$val){
+            $cols.="`".$key."`,";
+            $values.=":".$key.",";
+        }
+        $cols=substr($cols,0,-1).")";
+        $values=substr($values,0,-1).")";
+        $query.= $cols . " VALUES " . $values;
+
+        $stmt = $this->dbc->prepare($query);
+        $stmt->execute($data);
     }
 }

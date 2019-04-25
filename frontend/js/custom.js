@@ -34,12 +34,15 @@ function loadPage(path){
             type:'GET',
             beforeSend:function(){
                 loadingVeil(true);
+                console.log("Loading:"+path);
             },
             success:function(result){
                 $('#page-content').html(result);
+                console.log(path+" successfuly loaded");
             },
             error:function(err){
-                notifikasi("AJAX:Gagal memuat halaman","danger");
+                notifikasi("AJAX:Gagal memuat halaman", "danger");
+                console.log("failed to load "+path );
             },
             complete:function(){
                 loadingVeil(false);

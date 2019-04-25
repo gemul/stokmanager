@@ -17,6 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link href="frontend/sbadmin2/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="frontend/sbadmin2/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -41,7 +42,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" onclick="loadPage('frontend/pages/dashboard.php')">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -56,14 +57,14 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cubes"></i>
           <span>Barang</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="buttons.html">Kategori</a>
-            <a class="collapse-item" href="buttons.html">Barang (SKU)</a>
+            <a class="collapse-item" onclick="loadPage('frontend/pages/master-kategori.php')">Kategori</a>
+            <a class="collapse-item" onclick="loadPage('frontend/pages/master-barang.php')">Barang (SKU)</a>
           </div>
         </div>
       </li>
@@ -308,23 +309,34 @@
   <script src="frontend/js/bootstrap-notify.min.js"></script>
   <script src="frontend/js/custom.js"></script>
   <script src="frontend/js/homepage.js"></script>
+
+
+  <script src="frontend/sbadmin2/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="frontend/sbadmin2/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+
   <style>
     .loading-veil {
-      top:0px;
-      left:0px;
-      right:0px;
-      bottom:0px;
-      position:fixed;
-      background:rgba(255,255,255,.5);
-      z-index:400;
-      display:none;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      position: fixed;
+      background: rgba(255, 255, 255, .5);
+      z-index: 400;
+      display: none;
     }
-    .loading-veil > div {
-      position:fixed;
-      top:50%;
-      left:50%;
-      margin-top:-12px;
-      margin-left:-12px;
+
+    .loading-veil>div {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin-top: -12px;
+      margin-left: -12px;
+    }
+
+    .datatable-card {
+      width: 100%;
     }
   </style>
   <!-- Page level plugins -->
