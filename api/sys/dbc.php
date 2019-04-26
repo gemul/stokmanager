@@ -1,4 +1,7 @@
 <?php
+namespace sys;
+use PDO;
+
 class DBC
 {
     public $dbc = null;

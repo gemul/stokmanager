@@ -1,6 +1,7 @@
 <?php
-namespace model\etalase;
-use model\models;
+namespace models;
+
+use sys\models;
 
 class etalase extends models {
     protected $tabel = "etalase";

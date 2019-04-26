@@ -1,10 +1,9 @@
 <?php
-namespace model;
+namespace sys;
+use sys\DBC;
 
 class models extends DBC{
-
     protected $tabel = "";
-
     public function get($cols=[],$filters=[],$sorting=[],$start=0,$limit=512){
         $filterCount=count($filters);
         $filter=($filterCount==0)?"":" WHERE ";
