@@ -1,4 +1,8 @@
 <?php
+namespace models;
+
+use sys\models;
+
 class user extends models {
     protected $tabel = "user";
     function listAll(){

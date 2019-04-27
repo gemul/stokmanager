@@ -1,7 +1,8 @@
 <?php
+use models\user;
 FloadModels(['user']);
 $user=new user();
-$login= $user->get([
+$login= $user->get([],[
         ['username','=',$_POST['username']],
         ['password','=',md5($_POST['password'])]
     ]
