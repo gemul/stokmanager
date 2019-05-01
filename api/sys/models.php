@@ -70,6 +70,41 @@ class models extends DBC{
         $stmt->execute($data);
         return $this->dbc;
     }
+    public function update($formdata,$filters){
+        $query="UPDATE ".$this->tabel." SET ";
+        $dataval="";
+        foreach($formdata as $key=>$val){
+            $dataval.="`".$key. "`=:" . $key . ",";
+            $data[$key]=$val;
+        }
+        $dataval=substr($dataval,0,-1)."";
+
+        $filterCount = count($filters);
+        if($filterCount == 0){
+            return json_encode(['status'=>'DBERR','message'=>'Update need at least 1 condition.']);
+            exit;
+        }else{
+            $filter = ($filterCount == 0) ? "" : " WHERE ";
+            $i = 1;
+            $filterVal = array();
+            foreach ($filters as $cond) {
+                if (count($cond) == 1) {
+                    $filter .= " " . $cond[0] . " ";
+                } else {
+                    $filter .= " " . $cond[0] . " " . $cond[1] . " :" . $cond[0] . " ";
+                    $data[$cond[0]] = $cond[2];
+                }
+                $filter .= ($i < $filterCount) ? " AND " : "";
+                $i++;
+            }
+        }
+
+        $query.= $dataval . $filter;
+
+        $stmt = $this->dbc->prepare($query);
+        $stmt->execute($data);
+        return $this->dbc;
+    }
     function query($query,$data){
         $stmt = $this->dbc->prepare($query);
         $stmt->execute($data);

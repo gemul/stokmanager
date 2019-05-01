@@ -87,10 +87,72 @@
         });
     }
 
-    function kategoriEdit(id){
-        
+    function kategoriEdit(id) {
+
+        $("#modalKategoriEdit").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        $("#modalKategoriEdit").modal("show");
+
+        $.ajax({
+            url: "api/api.php?mod=kategori.get&id=" + id,
+            type: "GET",
+            beforeSend: function() {
+                $('#modalKategoriEdit .modal-footer button').prop('disabled', true);
+                $('#modalKategoriEdit .modal-body div:nth-child(1)').html("<i class='fa fa-spinner fa-spin'></i> Memuat");
+                $('#modalKategoriEdit #formKategoriEdit').hide();
+            },
+            success: function(result) {
+                if (result.status == 1) {
+                    $('#modalKategoriEdit #formKategoriEdit').show();
+                    $('#modalKategoriEdit .modal-footer button').prop('disabled', false);
+                    $("#formKategoriEdit [name='idetalase']").val(result.data[0].idetalase);
+                    $("#formKategoriEdit [name='namaetalase']").val(result.data[0].namaetalase);
+                } else {
+                    notifikasi("Error:" + result.message, "danger");
+                }
+            },
+            error: function() {
+                notifikasi("Error: ajax error", "danger");
+            },
+            complete: function() {
+                $('#modalKategoriEdit .modal-body div:nth-child(1)').html("");
+            }
+        });
+
     }
-    function kategoriDelete(id){
+
+    function updateKategori() {
+        var form = $('#formKategoriEdit');
+        event.preventDefault();
+        $.ajax({
+            url: "api/api.php?mod=kategori.update",
+            data: form.serialize(),
+            type: "POST",
+            beforeSend: function() {
+                $('#modalKategoriEdit .modal-footer button').prop('disabled', true);
+                $('#modalKategoriEdit .modal-footer button:nth-child(1)').html("Saving");
+            },
+            success: function(result) {
+                if (result.status == 1) {
+                    $("#modalKategoriEdit").modal("hide");
+                    notifikasi(result.message, "success");
+                } else {
+                    notifikasi("Error:" + result.message, "danger");
+                }
+            },
+            error: function() {
+                notifikasi("Error: ajax error", "danger");
+            },
+            complete: function() {
+                $('#modalKategoriEdit .modal-footer button').prop('disabled', false);
+                $('#modalKategoriEdit .modal-footer button:nth-child(1)').html("Update");
+            }
+        });
+    }
+
+    function kategoriDelete(id) {
 
     }
 </script>
@@ -121,6 +183,38 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="simpanKategori()">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="modalKategoriEdit">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Tambah Kategori</h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div></div>
+                <form onsubmit="updateKategori()" id="formKategoriEdit">
+                    <input type='hidden' name='idetalase' value=''>
+                    <div class="form-group row">
+                        <label for="inputNama" class="col-sm-2 col-form-label">Nama</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="namaetalase" placeholder="Nama Kategori">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="updateKategori()">Update</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
 
