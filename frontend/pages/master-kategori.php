@@ -19,7 +19,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nama Kategori</th>
-                            <th></th>
+                            <th style='width:55px;'></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -39,9 +39,10 @@
 </div>
 <!-- Content Row -->
 <script>
+    var dataTabel;
     // Call the dataTables jQuery plugin
     $(document).ready(function() {
-        $('#dataTable').DataTable({
+        dataTabel = $('#dataTable').DataTable({
             "autoWidth": false,
             "processing": true,
             "serverSide": true,
@@ -72,7 +73,9 @@
             success: function(result) {
                 if (result.status == 1) {
                     $("#modalKategori").modal("hide");
+                    $("#formKategori [name='namaetalase']").val("");
                     notifikasi(result.message, "success");
+                    dataTabel.ajax.reload();
                 } else {
                     notifikasi("Error:" + result.message, "danger");
                 }
@@ -137,7 +140,9 @@
             success: function(result) {
                 if (result.status == 1) {
                     $("#modalKategoriEdit").modal("hide");
+                    $("#formKategoriEdit [name='namaetalase']").val("");
                     notifikasi(result.message, "success");
+                    dataTabel.ajax.reload();
                 } else {
                     notifikasi("Error:" + result.message, "danger");
                 }
@@ -153,6 +158,29 @@
     }
 
     function kategoriDelete(id) {
+
+        $.ajax({
+            url: "api/api.php?mod=kategori.delete&id=" + id,
+            type: "GET",
+            beforeSend: function() {
+                $('#act-kategori-' + id + ' .iface-delete').prop('disabled', true).html("<i class='fa fa-spinner fa-spin'></i>");
+            },
+            success: function(result) {
+                if (result.status == 1) {
+                    dataTabel.ajax.reload();
+                } else {
+                    $('#act-kategori-' + id + ' .iface-delete').prop('disabled', false).html("<i class='fa fa-trash'></i>");
+                    notifikasi("Error:" + result.message, "danger");
+                }
+            },
+            error: function() {
+                notifikasi("Error: ajax error", "danger");
+                $('#act-kategori-' + id + ' .iface-delete').prop('disabled', false).html("<i class='fa fa-trash'></i>");
+            },
+            complete: function() {
+                $('#act-kategori-' + id + ' .iface-delete').prop('disabled', false).html("<i class='fa fa-trash'></i>");
+            }
+        });
 
     }
 </script>

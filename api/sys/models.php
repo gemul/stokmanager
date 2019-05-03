@@ -32,15 +32,15 @@ class models extends DBC{
         $i = 1;
         $columnCount = count($cols);
         $column = ($columnCount == 0) ? " * " : "";
-        foreach($cols as $col=>$srt){
-            $column .= $col . " " . $srt ;
+        foreach($cols as $col){
+            $column .= $col ;
             $column .= ($i < $columnCount) ? " , " : "";
             $i++;
         }
         
         
         $stmt= $this->dbc->prepare(
-            "SELECT * FROM " . $this->tabel . " 
+            "SELECT $column FROM " . $this->tabel . " 
             $filter
             $sort
             LIMIT
@@ -104,6 +104,35 @@ class models extends DBC{
         $stmt = $this->dbc->prepare($query);
         $stmt->execute($data);
         return $this->dbc;
+    }
+    public function delete($filters)
+    {
+        $query = "DELETE FROM " . $this->tabel . " ";
+
+        $filterCount = count($filters);
+        if ($filterCount == 0) {
+            return json_encode(['status' => 'DBERR', 'message' => 'Update need at least 1 condition.']);
+        } else {
+            $filter = ($filterCount == 0) ? "" : " WHERE ";
+            $i = 1;
+            $filterVal = array();
+            foreach ($filters as $cond) {
+                if (count($cond) == 1) {
+                    $filter .= " " . $cond[0] . " ";
+                } else {
+                    $filter .= " " . $cond[0] . " " . $cond[1] . " :" . $cond[0] . " ";
+                    $data[$cond[0]] = $cond[2];
+                }
+                $filter .= ($i < $filterCount) ? " AND " : "";
+                $i++;
+            }
+            $query .= $filter;
+
+            $stmt = $this->dbc->prepare($query);
+            $stmt->execute($data);
+            return $this->dbc;
+        }
+
     }
     function query($query,$data){
         $stmt = $this->dbc->prepare($query);
