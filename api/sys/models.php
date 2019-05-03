@@ -9,14 +9,19 @@ class models extends DBC{
         $filter=($filterCount==0)?"":" WHERE ";
         $i=1;
         $filterVal=Array();
-        foreach($filters as $cond){
+        foreach($filters as $cond) {
+            //glue
+            if( $i > 1 ){
+                $filter .= " AND ";
+            }
+
+            //condition
             if(count($cond)==1){
                 $filter.=" ".$cond[0]." ";
             }else{
                 $filter.=" ".$cond[0]." ".$cond[1]." :".$cond[0]." ";
                 $filterVal[ $cond[0] ] = $cond[2];
             }
-            $filter.=($i<$filterCount)?" AND ":"";
             $i++;
         }
 
@@ -37,7 +42,6 @@ class models extends DBC{
             $column .= ($i < $columnCount) ? " , " : "";
             $i++;
         }
-        
         
         $stmt= $this->dbc->prepare(
             "SELECT $column FROM " . $this->tabel . " 
@@ -88,13 +92,18 @@ class models extends DBC{
             $i = 1;
             $filterVal = array();
             foreach ($filters as $cond) {
+                //glue
+                if ($i > 1) {
+                    $filter .= " AND ";
+                }
+
+                //condition
                 if (count($cond) == 1) {
                     $filter .= " " . $cond[0] . " ";
                 } else {
                     $filter .= " " . $cond[0] . " " . $cond[1] . " :" . $cond[0] . " ";
                     $data[$cond[0]] = $cond[2];
                 }
-                $filter .= ($i < $filterCount) ? " AND " : "";
                 $i++;
             }
         }
@@ -117,13 +126,19 @@ class models extends DBC{
             $i = 1;
             $filterVal = array();
             foreach ($filters as $cond) {
+                //glue
+                if ($i > 1) {
+                    $filter .= " AND ";
+                }
+
+                //condition
+
                 if (count($cond) == 1) {
                     $filter .= " " . $cond[0] . " ";
                 } else {
                     $filter .= " " . $cond[0] . " " . $cond[1] . " :" . $cond[0] . " ";
                     $data[$cond[0]] = $cond[2];
                 }
-                $filter .= ($i < $filterCount) ? " AND " : "";
                 $i++;
             }
             $query .= $filter;
