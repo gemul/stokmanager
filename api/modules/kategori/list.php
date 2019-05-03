@@ -10,15 +10,33 @@ $limit= $_GET['length'];
 
 $cols=["idetalase","namaetalase"];
 
+//global filter
 $filter=[];
-if(isset($_GET['search']['value'])){
+if(!empty($_GET['search']['value'])){
     $filter=[
         ["namaetalase","like","%". $_GET['search']['value']."%"]
     ];
 }
 
+//column filter
+if (isset($_GET['columns'])) {
+    foreach ($_GET['columns'] as $col) {
+        if(!empty($col['search']['value'])){
+            array_push($filter,[ $cols[$col['data']] . " like " . "'%" . $col['search']['value'] . "%'"]);
+            // array_push($filter,[ $cols[$col['data']] , "like", "%" . $col['search']['value'] . "%"]);
+        }
+    }
+}
 
-$data = $kategori->get(["*"], $filter, [], $start, $limit);
+//sorting
+$sort=[];
+if (isset($_GET['order'])) {
+    foreach( $_GET['order'] as $ord){
+        $sort[ $cols[$ord['column']] ] = $ord['dir'];
+
+    }
+}
+$data = $kategori->get(["*"], $filter, $sort, $start, $limit);
 $count = $kategori->countData($filter);
 $countAll = $kategori->countData();
 

@@ -19,7 +19,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nama Kategori</th>
-                            <th style='width:55px;'></th>
+                            <th style='width:70px;'></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -42,13 +42,41 @@
     var dataTabel;
     // Call the dataTables jQuery plugin
     $(document).ready(function() {
+        $('#dataTable tfoot th').each(function() {
+            var title = $(this).text();
+            if (title != "") {
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            }
+        });
         dataTabel = $('#dataTable').DataTable({
             "autoWidth": false,
             "processing": true,
             "serverSide": true,
-            "ajax": "api/api.php?mod=kategori.list"
+            "sDom": "lrtip",
+            "ajax": "api/api.php?mod=kategori.list",
+            'columns': [{
+                    'orderable': true
+                }, //id
+                {
+                    'orderable': true
+                }, //nama
+                {
+                    'orderable': false
+                }, //act
+            ]
         });
+        // apply search
+        dataTabel.columns().every(function() {
+            var that = this;
 
+            $('input', this.footer()).on('keyup change', function() {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
     });
 
     function tambahKategori() {
