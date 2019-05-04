@@ -1,4 +1,8 @@
 <?php
+namespace models;
+
+use sys\models;
+
 class barang extends models {
     protected $tabel = "barang";
     function listAll(){

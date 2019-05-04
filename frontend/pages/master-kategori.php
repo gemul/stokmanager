@@ -9,7 +9,7 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4 datatable-card">
-        <div class="card-header py-3">  
+        <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Data Kategori</h6>
         </div>
         <div class="card-body">
@@ -195,6 +195,7 @@
             },
             success: function(result) {
                 if (result.status == 1) {
+                    notifikasi("Hapus: Data berhasil dihapus");
                     dataTabel.ajax.reload();
                 } else {
                     $('#act-kategori-' + id + ' .iface-delete').prop('disabled', false).html("<i class='fa fa-trash'></i>");

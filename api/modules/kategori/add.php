@@ -3,7 +3,7 @@ FloadModels(['etalase']);
 use models\etalase;
 
 $kategori = new etalase();
-$ins=$kategori->insert([ 'namaetalase' => 'test1']);
+$ins=$kategori->insert([ 'namaetalase' => $_POST['namaetalase']]);
 if($ins->lastInsertId()){
    echo json_encode(['status'=>'1','message'=>"Kategori ditambahkan"]);
 }else{
