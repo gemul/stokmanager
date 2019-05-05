@@ -18,6 +18,7 @@
   <!-- Custom styles for this template-->
   <link href="frontend/sbadmin2/css/sb-admin-2.min.css" rel="stylesheet">
   <link href="frontend/sbadmin2/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="frontend/plugins/select2/css/select2.min.css" rel="stylesheet">
 
 </head>
 
@@ -65,6 +66,19 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" onclick="loadPage('frontend/pages/master-kategori.php')">Kategori</a>
             <a class="collapse-item" onclick="loadPage('frontend/pages/master-barang.php')">Barang (SKU)</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseSHT" aria-expanded="true" aria-controls="collapseSHT">
+          <i class="fas fa-fw fa-cubes"></i>
+          <span>Supply, Harga, Tag</span>
+        </a>
+        <div id="collapseSHT" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" onclick="loadPage('frontend/pages/master-supplier.php')">Supplier</a>
+            <a class="collapse-item" onclick="loadPage('frontend/pages/master-harga.php')">Harga</a>
+            <a class="collapse-item" onclick="loadPage('frontend/pages/master-tag.php')">Tag</a>
           </div>
         </div>
       </li>
@@ -309,6 +323,7 @@
   <script src="frontend/js/bootstrap-notify.min.js"></script>
   <script src="frontend/js/custom.js"></script>
   <script src="frontend/js/homepage.js"></script>
+  <script src="frontend/plugins/select2/js/select2.min.js"></script>
 
 
   <script src="frontend/sbadmin2/vendor/datatables/jquery.dataTables.min.js"></script>

@@ -92,6 +92,27 @@
                 }
             });
         });
+        $('.select2-idetalase').select2({
+            ajax: {
+                delay: 250, // wait 250 milliseconds before triggering the request
+                quietMillis: 200,
+                url: "api/api.php?mod=barang.select2-kategori",
+                dataType: 'json',
+                data: function(params) {
+                    var query = {
+                        search: params.term,
+                        page: params.page || 1
+                    }
+                    return query;
+                },
+                cache: true
+            },
+            language: {
+                noResults: function(params) {
+                    return "Tidak ditemukan.";
+                }
+            }
+        });
     });
 
     function tambahBarang() {
@@ -135,6 +156,7 @@
                 $('#modalBarang .modal-footer button:nth-child(1)').html("Add");
             }
         });
+
     }
 
     function barangEdit(id) {
@@ -158,6 +180,7 @@
                     $('#modalBarangEdit #formBarangEdit').show();
                     $('#modalBarangEdit .modal-footer button').prop('disabled', false);
                     $("#formBarangEdit [name='idbarang']").val(result.data[0].idbarang);
+                    $("#formBarangEdit [name='idetalase']").html("<option value='" + result.data[0].idetalase + "'>" + result.data[0].namaetalase + "</option>");
                     $("#formBarangEdit [name='idetalase']").val(result.data[0].idetalase);
                     $("#formBarangEdit [name='namabarang']").val(result.data[0].namabarang);
                     $("#formBarangEdit [name='kodebarang']").val(result.data[0].kodebarang);
@@ -257,7 +280,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Kategori</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="idetalase" placeholder="Kategori Barang">
+                            <select class="form-control select2-idetalase" name="idetalase" placeholder="Kategori Barang" style="width:100%"></select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -307,7 +330,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Kategori</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="idetalase" placeholder="Kategori Barang">
+                            <select class="form-control select2-idetalase" name="idetalase" placeholder="Kategori Barang" style="width:100%"></select>
                         </div>
                     </div>
                     <div class="form-group row">
