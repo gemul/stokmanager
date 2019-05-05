@@ -88,34 +88,28 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Addons
+        Transaksi
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
+          <span>Inventory</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
+            <h6 class="collapse-header">Barang:</h6>
+            <a class="collapse-item" onclick="loadPage('frontend/pages/transaksi-mutasi.php')">Mutasi</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+        <a class="nav-link" onclick="loadPage('frontend/pages/transaksi-order.php')">
+          <i class="fas fa-fw fa-exchange-alt"></i>
+          <span>Order</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
@@ -324,6 +318,7 @@
   <script src="frontend/js/custom.js"></script>
   <script src="frontend/js/homepage.js"></script>
   <script src="frontend/plugins/select2/js/select2.min.js"></script>
+  <script src="frontend/plugins/masknumber/jquery.masknumber.min.js"></script>
 
 
   <script src="frontend/sbadmin2/vendor/datatables/jquery.dataTables.min.js"></script>
