@@ -19,18 +19,18 @@
                         <tr>
                             <th style='width:10px;'>ID</th>
                             <th>Kategori</th>
-                            <th>Nama Barang</th>
-                            <th>Kategori Barang</th>
+                            <th>Nama</th>
+                            <th>Kode</th>
                             <th>Status</th>
-                            <th style='width:70px;'></th>
+                            <th style='width:110px;'></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>ID</th>
                             <th>Kategori</th>
-                            <th>Nama Barang</th>
-                            <th>Kategori Barang</th>
+                            <th>Nama</th>
+                            <th>Kode</th>
                             <th>Status</th>
                             <th></th>
                         </tr>

@@ -1,1 +1,3 @@
 api/sys/config.php
+contents/product/*
+!contents/product/.gitkeep

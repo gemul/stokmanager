@@ -61,7 +61,7 @@ $countAll = $barang->countData();
 
 $fdata=Array();
 foreach($data as $item){
-    $fdata[]=[$item['idbarang'], $item['namaetalase'], $item['namabarang'], $item['kodebarang'], $item['statusbarang'], "<div id='act-barang-" . $item['idbarang'] . "'><button class='btn btn-primary btn-sm iface-edit' onclick='barangEdit(" . $item['idbarang'] . ")'><i class='fa fa-edit'></i></button> <button class='btn btn-warning btn-sm iface-delete' onclick='barangDelete(" . $item['idbarang'] . ")'><i class='fa fa-trash'></i></button></div> "];
+    $fdata[]=[$item['idbarang'], $item['namaetalase'], $item['namabarang'], $item['kodebarang'], $item['statusbarang'], "<div id='act-barang-" . $item['idbarang'] . "'> <button class='btn btn-warning btn-sm iface-detail' onclick=\"loadPage('frontend/pages/detail-barang.php?id=" . $item['idbarang'] . "')\"><i class='fa fa-eye'></i></button> <button class='btn btn-primary btn-sm iface-edit' onclick='barangEdit(" . $item['idbarang'] . ")'><i class='fa fa-edit'></i></button> <button class='btn btn-warning btn-sm iface-delete' onclick='barangDelete(" . $item['idbarang'] . ")'><i class='fa fa-trash'></i></button></div> "];
 }
 
 $return['draw']=$_GET['draw'];
