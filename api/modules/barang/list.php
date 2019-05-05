@@ -11,7 +11,7 @@ $limit= $_GET['length'];
 $cols=[ "idbarang", "namaetalase", "namabarang","kodebarang","statusbarang"];
 
 //global filter
-$filter=[["deleted is null"]];
+$filter=[["barang.deleted is null"]];
 if(!empty($_GET['search']['value'])){
     $filter=[
         ["namabarang","like","%". $_GET['search']['value']."%"]

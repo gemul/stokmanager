@@ -11,7 +11,7 @@ $limit= $_GET['length'];
 $cols=["idetalase","namaetalase"];
 
 //global filter
-$filter=[];
+$filter = [["deleted is null"]];
 if(!empty($_GET['search']['value'])){
     $filter=[
         ["namaetalase","like","%". $_GET['search']['value']."%"]

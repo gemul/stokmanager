@@ -8,6 +8,6 @@ if($id==0){
 } else {
    //valid id
    $kategori = new etalase();
-   $data=$kategori->delete([['idetalase','=',$id]]);
+   $data=$kategori->softDelete([['idetalase','=',$id]]);
    echo json_encode(['status'=> '1', 'message' => "success. data deleted"]);
 }
