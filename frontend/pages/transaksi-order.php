@@ -4,7 +4,7 @@
         <h1 class="h3 mb-0 text-gray-800">Transaksi</h1>
     </div>
     <div class="input-group mb-3 col-md-6">
-        <select class="form-control float-right" name="jenis">
+        <select class="form-control float-right" id="jenisTransaksi">
             <option value=1>Transaksi Masuk</option>
             <option value=2>Transaksi Keluar</option>
         </select>
@@ -121,7 +121,17 @@
             }
         });
         listCart();
-    });
+        $("#modalTransaksiMasuk").modal({
+            backdrop: 'static',
+            keyboard: false,
+            show: false
+        });
+        $("#modalTransaksiKeluar").modal({
+            backdrop: 'static',
+            keyboard: false,
+            show: false
+        });
+    }); //document ready
 
     function addBarang() {
         event.preventDefault();
@@ -135,7 +145,7 @@
             },
             success: function(result) {
                 if (result.status == 1) {
-                    $("#formBarang [name='idbarang']").val("");
+                    $("#formBarang [name='idbarang']").val("").html("");
                     $("#formBarang [name='volume']").val("");
                     $("#formBarang [name='harga']").val("");
                     notifikasi(result.message, "success");
@@ -179,6 +189,31 @@
 
     }
 
+    function clearBarang() {
+        $.ajax({
+            url: "api/api.php?mod=order.cartitem&cart=remove&index=all",
+            type: "POST",
+            beforeSend: function() {
+                $('#tabelCart tbody').html("<td colspan='5'>Mengosongkan keranjang...</td>");
+            },
+            success: function(result) {
+                if (result.status == 1) {
+                    notifikasi(result.message, "success");
+                    $('#tabelCart tbody').html("<td colspan='5'>Tidak ada data</td>");
+                } else {
+                    listCart();
+                    notifikasi("Error:" + result.message, "danger");
+                }
+            },
+            error: function() {
+                notifikasi("Error: ajax error", "danger");
+                listCart();
+            },
+            complete: function() { }
+        });
+
+    }
+
     function listCart() {
         $.ajax({
             url: "api/api.php?mod=order.cartitem&cart=list",
@@ -191,7 +226,7 @@
                     var text = "";
                     var total = 0;
                     for (x in result.data) {
-                        var subtotal = result.data[x].volume + result.data[x].harga;
+                        var subtotal = result.data[x].volume * result.data[x].harga;
                         var total = total + parseInt(subtotal);
                         text = text + "\
                         <tr class='cartitem' cid='" + x + "'> \
@@ -205,7 +240,7 @@
                         </tr>";
                     }
                     if (text == "") {
-                        $('#tabelCart tbody').html("<td colspan='5'>No data</td>");
+                        $('#tabelCart tbody').html("<td colspan='5'>Tidak ada data</td>");
                     } else {
                         $('#tabelCart tbody').html(text);
                     }
@@ -223,4 +258,123 @@
         });
 
     }
+
+    function bungkus() {
+        if ($('#jenisTransaksi').val() == "1") {
+            //transaksi masuk
+            $("#modalTransaksiMasuk").modal("show");
+        } else {
+            //transaksi keluar
+            $("#modalTransaksiKeluar").modal("show");
+        }
+    }
+
+    function simpanTransaksi(jenis) {
+        event.preventDefault();
+        var form = $('#formTransaksi' + jenis);
+        $.ajax({
+            url: "api/api.php?mod=order.cartitem&cart=add",
+            data: form.serialize(),
+            type: "POST",
+            beforeSend: function() {
+                $("#formTransaksi" + jenis + " button.iface-simpantransaksi").prop('disabled', true).html("Saving");
+            },
+            success: function(result) {
+                if (result.status == 1) {
+                    $("#formTransaksi" + jenis + " [name='jenistransaksi']").val("");
+                    $("#formTransaksi" + jenis + " [name='subject']").val("");
+                    $("#formTransaksi" + jenis + " [name='note']").val("");
+                    notifikasi(result.message, "success");
+                    listCart();
+                } else {
+                    notifikasi("Error:" + result.message, "danger");
+                }
+            },
+            error: function() {
+                notifikasi("Error: ajax error", "danger");
+            },
+            complete: function() {
+                $("#formTransaksi" + jenis + " button.iface-simpantransaksi").prop('disabled', false).html("<i class='fa fa-plus'></i> Add");
+            }
+        });
+    }
 </script>
+
+<!-- modals -->
+
+<div class="modal" id="modalTransaksiMasuk">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Transaksi Masuk</h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div></div>
+                <form onsubmit="simpanTransaksi('Masuk')" id="formTransaksiMasuk">
+                    <input type='hidden' name='jenistransaksi' value=''>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Subject</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="subject" placeholder="Subject">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Note</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="note" placeholder="Note">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary iface-simpantransaksi" onclick="simpanTransaksi('Masuk')">Simpan</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="modalTransaksiKeluar">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Transaksi Keluar</h4>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div></div>
+                <form onsubmit="simpanTransaksi('Keluar')" id="formTransaksiKeluar">
+                    <input type='hidden' name='jenistransaksi' value=''>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Subject</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="subject" placeholder="Subject">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Note</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="note" placeholder="Note">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary iface-simpantransaksi" onclick="simpanTransaksi('Keluar')">Simpan</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

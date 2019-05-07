@@ -20,9 +20,14 @@ switch($_GET['cart']){
         echo json_encode(['status' => '1', 'message' => "Barang ditambahkan"]);
     break;
     case 'remove':
-        unset($cart[$_GET['index']]);
+        if( $_GET['index'] =="all"){
+            $cart=[];
+            echo json_encode(['status' => '1', 'message' => "Keranjang dikosongkan"]);
+        }else{
+            unset($cart[$_GET['index']]);
+            echo json_encode(['status' => '1', 'message' => "Barang dihapus"]);
+        }
         $_SESSION['stokman']['cart'] = $cart;
-        echo json_encode(['status' => '1', 'message' => "Barang dihapus"]);
     break;
     case 'list':
         $result=[];
