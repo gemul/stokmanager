@@ -11,6 +11,7 @@ if ($id == 0) {
    $idetalase = $_POST['idetalase'];
    $namabarang = $_POST['namabarang'];
    $kodebarang = $_POST['kodebarang'];
+   $catatan = $_POST['catatan'];
    $statusbarang = $_POST['statusbarang'];
    //update
    $kategori = new barang();
@@ -19,6 +20,7 @@ if ($id == 0) {
          'idetalase' => $idetalase ,
          'namabarang' => $namabarang ,
          'kodebarang' => $kodebarang ,
+         'catatan' => $catatan ,
          'statusbarang' => $statusbarang ,
       ],
       [['idbarang','=',$id]]

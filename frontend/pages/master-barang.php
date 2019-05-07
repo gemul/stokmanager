@@ -141,6 +141,7 @@
                     $("#formBarang [name='idetalase']").val("");
                     $("#formBarang [name='namabarang']").val("");
                     $("#formBarang [name='kodebarang']").val("");
+                    $("#formBarang [name='catatan']").val("");
                     $("#formBarang [name='statusbarang']").val("");
                     notifikasi(result.message, "success");
                     dataTabel.ajax.reload();
@@ -183,6 +184,7 @@
                     $("#formBarangEdit [name='idetalase']").html("<option value='" + result.data[0].idetalase + "'>" + result.data[0].namaetalase + "</option>");
                     $("#formBarangEdit [name='idetalase']").val(result.data[0].idetalase);
                     $("#formBarangEdit [name='namabarang']").val(result.data[0].namabarang);
+                    $("#formBarangEdit [name='catatan']").val(result.data[0].catatan);
                     $("#formBarangEdit [name='kodebarang']").val(result.data[0].kodebarang);
                     $("#formBarangEdit [name='statusbarang']").val(result.data[0].statusbarang);
                 } else {
@@ -217,6 +219,7 @@
                     $("#formBarangEdit [name='idetalase']").val("");
                     $("#formBarangEdit [name='namabarang']").val("");
                     $("#formBarangEdit [name='kodebarang']").val("");
+                    $("#formBarangEdit [name='catatan']").val("");
                     $("#formBarangEdit [name='statusbarang']").val("");
                     notifikasi(result.message, "success");
                     dataTabel.ajax.reload();
@@ -296,6 +299,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Catatan</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="catatan" placeholder="Catatan">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="statusbarang" placeholder="Status Barang">
@@ -343,6 +352,12 @@
                         <label class="col-sm-2 col-form-label">Kode</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="kodebarang" placeholder="Kode Barang">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Catatan</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="catatan" placeholder="Catatan">
                         </div>
                     </div>
                     <div class="form-group row">
