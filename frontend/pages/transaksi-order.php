@@ -209,7 +209,7 @@
                 notifikasi("Error: ajax error", "danger");
                 listCart();
             },
-            complete: function() { }
+            complete: function() {}
         });
 
     }
@@ -271,17 +271,18 @@
 
     function simpanTransaksi(jenis) {
         event.preventDefault();
-        var form = $('#formTransaksi' + jenis);
+        var form = $('#formTransaksi' + jenis).serializeArray();
+        form.push({'name':'jenis','value':$("#jenisTransaksi").val()})
         $.ajax({
-            url: "api/api.php?mod=order.cartitem&cart=add",
-            data: form.serialize(),
+            url: "api/api.php?mod=order.cartitem&cart=save",
+            data: form,
             type: "POST",
             beforeSend: function() {
                 $("#formTransaksi" + jenis + " button.iface-simpantransaksi").prop('disabled', true).html("Saving");
             },
             success: function(result) {
                 if (result.status == 1) {
-                    $("#formTransaksi" + jenis + " [name='jenistransaksi']").val("");
+                    $("#jenisTransaksi").val("");
                     $("#formTransaksi" + jenis + " [name='subject']").val("");
                     $("#formTransaksi" + jenis + " [name='note']").val("");
                     notifikasi(result.message, "success");
@@ -315,7 +316,7 @@
             <div class="modal-body">
                 <div></div>
                 <form onsubmit="simpanTransaksi('Masuk')" id="formTransaksiMasuk">
-                    <input type='hidden' name='jenistransaksi' value=''>
+                    <input type='hidden' name='jenistransaksi' value='masuk'>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Subject</label>
                         <div class="col-sm-10">
@@ -353,7 +354,7 @@
             <div class="modal-body">
                 <div></div>
                 <form onsubmit="simpanTransaksi('Keluar')" id="formTransaksiKeluar">
-                    <input type='hidden' name='jenistransaksi' value=''>
+                    <input type='hidden' name='jenistransaksi' value='keluar'>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Subject</label>
                         <div class="col-sm-10">
