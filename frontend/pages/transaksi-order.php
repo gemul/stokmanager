@@ -259,20 +259,36 @@
 
     }
 
-    function bungkus() {
-        if ($('#jenisTransaksi').val() == "1") {
-            //transaksi masuk
-            $("#modalTransaksiMasuk").modal("show");
+    function bungkus(openclose) {
+        if (openclose === undefined) {
+            //buka
+            if ($('#jenisTransaksi').val() == "1") {
+                //transaksi masuk
+                $("#modalTransaksiMasuk").modal("show");
+            } else {
+                //transaksi keluar
+                $("#modalTransaksiKeluar").modal("show");
+            }
         } else {
-            //transaksi keluar
-            $("#modalTransaksiKeluar").modal("show");
+            // tutup
+            //buka
+            if ($('#jenisTransaksi').val() == "1") {
+                //transaksi masuk
+                $("#modalTransaksiMasuk").modal("hide");
+            } else {
+                //transaksi keluar
+                $("#modalTransaksiKeluar").modal("hide");
+            }
         }
     }
 
     function simpanTransaksi(jenis) {
         event.preventDefault();
         var form = $('#formTransaksi' + jenis).serializeArray();
-        form.push({'name':'jenis','value':$("#jenisTransaksi").val()})
+        form.push({
+            'name': 'jenis',
+            'value': $("#jenisTransaksi").val()
+        })
         $.ajax({
             url: "api/api.php?mod=order.cartitem&cart=save",
             data: form,
@@ -282,11 +298,11 @@
             },
             success: function(result) {
                 if (result.status == 1) {
-                    $("#jenisTransaksi").val("");
                     $("#formTransaksi" + jenis + " [name='subject']").val("");
                     $("#formTransaksi" + jenis + " [name='note']").val("");
                     notifikasi(result.message, "success");
-                    listCart();
+                    clearBarang();
+                    bungkus(false);
                 } else {
                     notifikasi("Error:" + result.message, "danger");
                 }
