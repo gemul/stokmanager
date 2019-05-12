@@ -38,6 +38,13 @@
                         <td id=detail-status></td>
                     </tr>
                     <tr>
+                        <td>Catatan</td>
+                        <td>:</td>
+                        <td>
+                            <pre id=detail-catatan></pre>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Ditambah</td>
                         <td>:</td>
                         <td id=detail-created></td>
@@ -168,6 +175,7 @@
                     $("#detail-nama").html(result.data[0].namabarang);
                     $("#detail-kode").html(result.data[0].kode);
                     $("#detail-status").html(result.data[0].status);
+                    $("#detail-catatan").html(result.data[0].catatan);
                     $("#detail-created").html(result.data[0].created);
                 } else {
                     notifikasi("Error:" + result.message, "danger");

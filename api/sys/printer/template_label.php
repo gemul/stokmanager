@@ -7,6 +7,7 @@ $connector = new FilePrintConnector(PRINTER_NAME);
 $printer = new Printer($connector);
 
 $MAXLENGTH=23;
+$MAXLENGTHB=33;
 
 //PRINT
 //staplemark
@@ -23,11 +24,21 @@ $printer -> bitImage($img);
 //feed
 $printer->feed();
 
+//barcode
+$printer->setBarcodeHeight(80);
+$printer->setJustification(Printer::JUSTIFY_CENTER);
+$printer->barcode($data['bcid'], Printer::BARCODE_JAN13);
+$printer->feed();
+
+$printer->setJustification(Printer::JUSTIFY_LEFT);
 //print detail
-$printer -> text("SKU    : ".substr($data['sku'],0,$MAXLENGTH)."\n");
-$printer -> text("NAME   : ".substr( $data['name'],0,$MAXLENGTH)."\n");
+$printer -> text("SKU  : ".substr($data['sku'],0,$MAXLENGTH)."\n");
+$printer -> text("NAME :");
+$printer->selectPrintMode(Printer::MODE_FONT_B);
+$printer -> text(" ".substr( $data['name'],0,$MAXLENGTHB)."\n");
+$printer->selectPrintMode(Printer::MODE_FONT_A);
 //description
-$printer -> text("DESC   : \n");
+$printer -> text("DESC : \n");
 $printer->selectPrintMode(Printer::MODE_FONT_B);
 if( $data['desc'] ==""){
 	$printer->text( "-NO DESCRIPTION-\n");
@@ -36,13 +47,8 @@ if( $data['desc'] ==""){
 }
 $printer->selectPrintMode(Printer::MODE_FONT_A);
 
-//barcode
-$printer -> setBarcodeHeight(80); 
-$printer->setJustification(Printer::JUSTIFY_CENTER);
-$printer -> barcode($data['bcid'], Printer::BARCODE_JAN13);
-$printer -> feed();
 
-//$printer -> feed();
+$printer -> feed();
 $printer -> feed();
 $printer -> cut();
 $printer -> close();
