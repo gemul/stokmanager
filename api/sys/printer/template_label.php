@@ -25,7 +25,6 @@ $printer->feed();
 
 //print detail
 $printer -> text("SKU    : ".substr($data['sku'],0,$MAXLENGTH)."\n");
-$printer -> text("ITEM ID: ".substr( $data['id'],0,$MAXLENGTH)."\n");
 $printer -> text("NAME   : ".substr( $data['name'],0,$MAXLENGTH)."\n");
 //description
 $printer -> text("DESC   : \n");
@@ -40,7 +39,7 @@ $printer->selectPrintMode(Printer::MODE_FONT_A);
 //barcode
 $printer -> setBarcodeHeight(80); 
 $printer->setJustification(Printer::JUSTIFY_CENTER);
-$printer -> barcode($data['id'], Printer::BARCODE_JAN13);
+$printer -> barcode($data['bcid'], Printer::BARCODE_JAN13);
 $printer -> feed();
 
 //$printer -> feed();
