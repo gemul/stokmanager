@@ -11,6 +11,7 @@ if ($id == 0) {
    $idbarang = $_POST['idbarang'];
    $idsupplier = $_POST['idsupplier'];
    $nominalharga = $_POST['nominalharga'];
+   $urlharga = $_POST['urlharga'];
    //update
    $kategori = new harga();
    $update=$kategori->update(
@@ -18,6 +19,7 @@ if ($id == 0) {
          'idbarang' => $idbarang ,
          'idsupplier' => $idsupplier ,
          'nominalharga' => $nominalharga ,
+         'urlharga' => $urlharga ,
       ],
       [['idharga','=',$id]]
    );

@@ -21,7 +21,7 @@
                             <th>Barang</th>
                             <th>Supplier</th>
                             <th>Harga</th>
-                            <th style='width:70px;'></th>
+                            <th style='width:110px;'></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -157,6 +157,7 @@
                     $("#formHarga [name='idbarang']").val("");
                     $("#formHarga [name='idsupplier']").val("");
                     $("#formHarga [name='nominalharga']").val("");
+                    $("#formHarga [name='urlharga']").val("");
                     notifikasi(result.message, "success");
                     dataTabel.ajax.reload();
                 } else {
@@ -200,6 +201,7 @@
                     $("#formHargaEdit [name='idsupplier']").html("<option value='" + result.data[0].idsupplier + "'>" + result.data[0].namasupplier + "</option>");
                     $("#formHargaEdit [name='idsupplier']").val(result.data[0].idsupplier);
                     $("#formHargaEdit [name='nominalharga']").val(result.data[0].nominalharga);
+                    $("#formHargaEdit [name='urlharga']").val(result.data[0].urlharga);
                 } else {
                     notifikasi("Error:" + result.message, "danger");
                 }
@@ -232,6 +234,7 @@
                     $("#formHargaEdit [name='idbarang']").val("");
                     $("#formHargaEdit [name='idsupplier']").val("");
                     $("#formHargaEdit [name='nominalharga']").val("");
+                    $("#formHargaEdit [name='urlharga']").val("");
                     notifikasi(result.message, "success");
                     dataTabel.ajax.reload();
                 } else {
@@ -309,6 +312,12 @@
                             <input type="text" class="form-control" name="nominalharga" placeholder="Harga">
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Url</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="urlharga" placeholder="Url">
+                        </div>
+                    </div>
                 </form>
             </div>
 
@@ -351,6 +360,12 @@
                         <label class="col-sm-2 col-form-label">Harga</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="nominalharga" placeholder="Harga">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Url</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="urlharga" placeholder="Url">
                         </div>
                     </div>
                 </form>

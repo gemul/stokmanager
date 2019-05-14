@@ -63,7 +63,7 @@ $countAll = $harga->countData();
 
 $fdata=Array();
 foreach($data as $item){
-    $fdata[]=[$item['idharga'], $item['namabarang'], $item['namasupplier'], $item['nominalharga'], "<div id='act-harga-" . $item['idharga'] . "'><button class='btn btn-primary btn-sm iface-edit' onclick='hargaEdit(" . $item['idharga'] . ")'><i class='fa fa-edit'></i></button> <button class='btn btn-warning btn-sm iface-delete' onclick='hargaDelete(" . $item['idharga'] . ")'><i class='fa fa-trash'></i></button></div> "];
+    $fdata[]=[$item['idharga'], $item['namabarang'], $item['namasupplier'], $item['nominalharga'], "<div id='act-harga-" . $item['idharga'] . "'><a class='btn btn-info btn-sm' href='" . $item['urlharga'] . "' target='stokman'><i class='fa fa-link'></i></a> <button class='btn btn-primary btn-sm iface-edit' onclick='hargaEdit(" . $item['idharga'] . ")'><i class='fa fa-edit'></i></button> <button class='btn btn-warning btn-sm iface-delete' onclick='hargaDelete(" . $item['idharga'] . ")'><i class='fa fa-trash'></i></button></div> "];
 }
 
 $return['draw']=$_GET['draw'];
