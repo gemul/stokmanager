@@ -45,6 +45,18 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>Berat</td>
+                        <td>:</td>
+                        <td id=detail-berat></td>
+                    </tr>
+                    <tr>
+                        <td>Deskripsi</td>
+                        <td>:</td>
+                        <td>
+                            <pre id=detail-deskripsi></pre>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Ditambah</td>
                         <td>:</td>
                         <td id=detail-created></td>
@@ -176,6 +188,8 @@
                     $("#detail-kode").html(result.data[0].kode);
                     $("#detail-status").html(result.data[0].status);
                     $("#detail-catatan").html(result.data[0].catatan);
+                    $("#detail-berat").html(result.data[0].berat);
+                    $("#detail-deskripsi").html(result.data[0].deskripsi);
                     $("#detail-created").html(result.data[0].created);
                 } else {
                     notifikasi("Error:" + result.message, "danger");

@@ -13,6 +13,8 @@ $ins=$barang->insert([
          'namabarang' => $_POST['namabarang'],
          'kodebarang' => $_POST['kodebarang'],
          'catatan' => $_POST['catatan'],
+         'berat' => $_POST['berat'],
+         'deskripsi' => $_POST['deskripsi'],
          'statusbarang' => $_POST['statusbarang'],
       ]);
 if($ins->lastInsertId()){

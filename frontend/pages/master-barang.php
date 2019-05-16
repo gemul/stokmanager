@@ -142,6 +142,8 @@
                     $("#formBarang [name='namabarang']").val("");
                     $("#formBarang [name='kodebarang']").val("");
                     $("#formBarang [name='catatan']").val("");
+                    $("#formBarang [name='berat']").val("");
+                    $("#formBarang [name='deskripsi']").val("");
                     $("#formBarang [name='statusbarang']").val("");
                     notifikasi(result.message, "success");
                     dataTabel.ajax.reload();
@@ -185,6 +187,8 @@
                     $("#formBarangEdit [name='idetalase']").val(result.data[0].idetalase);
                     $("#formBarangEdit [name='namabarang']").val(result.data[0].namabarang);
                     $("#formBarangEdit [name='catatan']").val(result.data[0].catatan);
+                    $("#formBarangEdit [name='berat']").val(result.data[0].berat);
+                    $("#formBarangEdit [name='deskripsi']").val(result.data[0].deskripsi);
                     $("#formBarangEdit [name='kodebarang']").val(result.data[0].kodebarang);
                     $("#formBarangEdit [name='statusbarang']").val(result.data[0].statusbarang);
                 } else {
@@ -220,6 +224,8 @@
                     $("#formBarangEdit [name='namabarang']").val("");
                     $("#formBarangEdit [name='kodebarang']").val("");
                     $("#formBarangEdit [name='catatan']").val("");
+                    $("#formBarangEdit [name='berat']").val("");
+                    $("#formBarangEdit [name='deskripsi']").val("");
                     $("#formBarangEdit [name='statusbarang']").val("");
                     notifikasi(result.message, "success");
                     dataTabel.ajax.reload();
@@ -305,6 +311,18 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Berat</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="berat" placeholder="Berat Barang">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Deskripsi</label>
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control" name="deskripsi" placeholder="Catatan"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="statusbarang" placeholder="Status Barang">
@@ -358,6 +376,18 @@
                         <label class="col-sm-2 col-form-label">Catatan</label>
                         <div class="col-sm-10">
                             <textarea type="text" class="form-control" name="catatan" placeholder="Catatan"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Berat</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="berat" placeholder="Berat Barang">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Deskripsi</label>
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control" name="deskripsi" placeholder="Catatan"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
