@@ -1,4 +1,6 @@
 api/sys/config.php
 api/sys/printer/logo/shipping-label.png
+api/sys/printer/*
+!api/sys/printer/template_*
 contents/product/*
 !contents/product/.gitkeep
