@@ -1,6 +1,6 @@
 <?php
 session_start();
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
 require_once("sys/config.php");
 require_once("sys/dbc.php");
 require_once("sys/models.php");
